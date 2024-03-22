@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{f508bd81-b156-41b1-99ec-63e1d34b5202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\network">
+      <UniqueIdentifier>{d47a974b-82ae-4709-904a-0baeaced18ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\packets">
+      <UniqueIdentifier>{15836cbf-5a3b-494c-9a60-6fa6347fc94b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\utility">
+      <UniqueIdentifier>{cf16298a-823b-4592-b3a4-24798694eb46}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common\packets\allpackets.hpp">
+      <Filter>common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\ErrorPacket.hpp">
+      <Filter>common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\IdentPacket.hpp">
+      <Filter>common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\LoadPacket.hpp">
+      <Filter>common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\NopPacket.hpp">
+      <Filter>common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\Packet.hpp">
+      <Filter>common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\PacketType.hpp">
+      <Filter>common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\PlayPacket.hpp">
+      <Filter>common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\ShowPacket.hpp">
+      <Filter>common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\SyncPacket.hpp">
+      <Filter>common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\Connection.hpp">
+      <Filter>common\network</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\FrameTimer.hpp">
+      <Filter>common\network</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\FrameValue.hpp">
+      <Filter>common\network</Filter>
+    </ClInclude>
+    <ClInclude Include="common\utility\buffer.hpp">
+      <Filter>common\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="common\utility\dbgutil.hpp">
+      <Filter>common\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="common\utility\mapfile.hpp">
+      <Filter>common\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="common\utility\strutil.hpp">
+      <Filter>common\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="common\utility\timeutil.hpp">
+      <Filter>common\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowServer\ConfigFile.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowServer\ConnectionHolder.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowServer\Listener.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowServer\PlayList.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowServer\Show.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="common\packets\ErrorPacket.cpp">
+      <Filter>common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\IdentPacket.cpp">
+      <Filter>common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\LoadPacket.cpp">
+      <Filter>common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\NopPacket.cpp">
+      <Filter>common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\Packet.cpp">
+      <Filter>common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\PacketType.cpp">
+      <Filter>common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\PlayPacket.cpp">
+      <Filter>common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\ShowPacket.cpp">
+      <Filter>common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\SyncPacket.cpp">
+      <Filter>common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\network\Connection.cpp">
+      <Filter>common\network</Filter>
+    </ClCompile>
+    <ClCompile Include="common\network\FrameTimer.cpp">
+      <Filter>common\network</Filter>
+    </ClCompile>
+    <ClCompile Include="common\network\FrameValue.cpp">
+      <Filter>common\network</Filter>
+    </ClCompile>
+    <ClCompile Include="common\utility\buffer.cpp">
+      <Filter>common\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="common\utility\mapfile.cpp">
+      <Filter>common\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="common\utility\timeutil.cpp">
+      <Filter>common\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\ConfigFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\ConnectionHolder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\Listener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\PlayList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\Show.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
