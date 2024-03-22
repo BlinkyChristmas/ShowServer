@@ -121,6 +121,11 @@ auto runLoop(ConfigFile &config,std::filesystem::path &config_file) -> void {
                     }
                }
             }
+            else if (inShow && !config.listenTime.inRange()){
+                if(show->isPlaying && !show->shouldStop) {
+                    show->shouldStop = true ;
+                }
+            }
             if (listener.isListening){
                 
                 if (config.startRange.inRange() && !inStartRange) {
@@ -198,9 +203,13 @@ auto runLoop(ConfigFile &config,std::filesystem::path &config_file) -> void {
             if (!config.listenTime.inRange() && listener.isListening && !inShow){
                 // we need to stop listening!
                 DBGMSG(std::cout, "Stop Listening");
-                listener.close() ;
+                listener.netSocket().close() ;
                 isListening = false ;
+                // Now close our connections that we may have running
+                connections->clear() ;
+                std::this_thread::sleep_for(std::chrono::seconds(1)) ; // Allow things to settle
                 // Log to server log!
+                listener.close() ;
                 auto output = std::ofstream(config.serverlog, std::ios::app) ;
                 auto msg = "STATE = "s +"ON,"s + ",OFF,"s  + "OFF,"s + util::sysTimeToString(util::ourclock::now()) ;
                 if (output.is_open()) {
@@ -210,6 +219,20 @@ auto runLoop(ConfigFile &config,std::filesystem::path &config_file) -> void {
                 
             }
             std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
+        // we are outside the run time, we need to ensure we are not listinging or playing
+        while (show->showPlaying) {
+            if (show->shouldStop != false) {
+                show->shouldStop = true ;
+            }
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
+        // We are shutting down for good!
+        if (listener.isListening) {
+            listener.netSocket().close() ;
+            connections->clear() ;
+            std::this_thread::sleep_for(std::chrono::seconds(1)) ; // Allow things to settle
+            listener.close() ;
         }
         
     }

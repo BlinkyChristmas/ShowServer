@@ -32,6 +32,7 @@ class Listener {
 public:
     Listener(ConnectionHolderPointer holder,std::shared_ptr<Show> showPtr) ;
     ~Listener();
+    auto netSocket() -> asio::ip::tcp::acceptor & ;
     auto listen(std::uint16_t port) -> bool ;
     bool isListening;
     auto close() -> void ;

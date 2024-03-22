@@ -32,6 +32,8 @@ Connection::Connection(asio::io_context &context):netSocket(context), incomingAm
 
 // =====================================================================
 Connection::~Connection(){
+    this->setCloseCallback(nullptr) ;
+    this->setPacketRoutine(nullptr) ;
     if (netSocket.is_open()) {
         netSocket.close();
     }

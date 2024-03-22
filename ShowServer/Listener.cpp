@@ -109,6 +109,11 @@ auto Listener::handleConnect(std::shared_ptr<Connection> client ,const asio::err
 }
 
 // ===================================================================
+auto Listener::netSocket() -> asio::ip::tcp::acceptor & {
+    return acceptor ;
+}
+
+// ===================================================================
 auto Listener::listen(std::uint16_t port) -> bool {
     if (isListening) {
         return false ;
@@ -160,7 +165,7 @@ auto Listener::close() -> void {
         connection_thread.join();
         connection_thread = std::thread() ;
     }
-    connectionHolder->clear() ;
+    
     if (client_thread.joinable()) {
         client_thread.join();
         client_thread = std::thread() ;
