@@ -137,7 +137,7 @@ auto runLoop(ConfigFile &config,std::filesystem::path &config_file) -> void {
                     connections->sendPacket(packet) ;
 
                 }
-                if (config.showTime.inRange()) {
+                if (config.showTime.inRange() && config.listenTime.inRange()) {
                     if (!show->showPlaying) {
                         DBGMSG(std::cout, "Actually Start the Show");
                         // we need to load the show, and "start the show"
@@ -217,6 +217,12 @@ auto runLoop(ConfigFile &config,std::filesystem::path &config_file) -> void {
                     output.close();
                 }
                 
+            }
+            else if (!config.listenTime.inRange() && listener.isListening && inShow) {
+                if (show->shouldStop != true) {
+                    DBGMSG(std::cout, "Tell the show it should stop");
+                    show->shouldStop = true;
+                }
             }
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
