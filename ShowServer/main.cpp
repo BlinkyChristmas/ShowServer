@@ -235,12 +235,12 @@ auto runLoop(ConfigFile &config,std::filesystem::path &config_file) -> void {
         }
         // We are shutting down for good!
         if (listener.isListening) {
-            std::cout << "Stopping listener" << std::endl;
+            //std::cout << "Stopping listener" << std::endl;
             listener.stop();
-            std::cout << "Clearing connections" << std::endl;
+            //std::cout << "Clearing connections" << std::endl;
             connections->clear() ;
             std::this_thread::sleep_for(std::chrono::seconds(1)) ; // Allow things to settle
-            std::cout << "Closing listener " << std::endl;
+            //std::cout << "Closing listener " << std::endl;
             listener.close() ;
         }
         

@@ -70,9 +70,6 @@ auto Listener::stop()-> void {
 auto Listener::handleConnect(std::shared_ptr<Connection> client ,const asio::error_code& ec) -> void  {
     if (ec) {
         DBGMSG(std::cerr,"Listener Error on connection: "s + ec.message());
-        if (acceptor.is_open()) {
-            acceptor.close();
-        }
         return ;
     }
     
@@ -148,20 +145,20 @@ auto Listener::listen(std::uint16_t port) -> bool {
     }
     acceptor.open(asio::ip::tcp::v4(),ec) ;
     if (ec) {
-        std::cerr << "Error opening acceptor"<< ec.message() << std::endl;
+        DBGMSG(std::cerr,"Error opening acceptor"s + ec.message());
         return false ;
     }
     asio::socket_base::reuse_address option(true) ;
     acceptor.set_option(option) ;
     acceptor.bind(asio::ip::tcp::endpoint(asio::ip::address_v4::any(), port ),ec) ;
     if (ec) {
-        std::cerr << "Error binding acceptor: " << ec.message() << std::endl;
+        DBGMSG(std::cerr, "Error binding acceptor: "s + ec.message());
         acceptor.close() ;
         return false ;
     }
     acceptor.listen(50, ec) ;
     if (ec) {
-        std::cerr << "Error listening: " << ec.message() << std::endl;
+        DBGMSG(std::cerr,"Error listening: "s + ec.message());
         acceptor.close() ;
         return false ;
     }
