@@ -28,6 +28,7 @@
 		568A29062BAC69C60071849C /* PlayList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 568A29042BAC69C60071849C /* PlayList.cpp */; };
 		568A29092BAC69E20071849C /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 568A29072BAC69E20071849C /* Listener.cpp */; };
 		568A290C2BAC7DE00071849C /* Show.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 568A290A2BAC7DE00071849C /* Show.cpp */; };
+		568A2C682BAF84F50071849C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 568A2C672BAF84F50071849C /* CoreFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -770,6 +771,7 @@
 		568A29142BADDF190071849C /* BUILDING.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUILDING.txt; sourceTree = "<group>"; };
 		568A29182BADDF2E0071849C /* playlist.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = playlist.cfg; sourceTree = "<group>"; };
 		568A29192BADDF2E0071849C /* server.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = server.cfg; sourceTree = "<group>"; };
+		568A2C672BAF84F50071849C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -777,6 +779,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				568A2C682BAF84F50071849C /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,7 +789,6 @@
 		568A01BF2BAB1B670071849C = {
 			isa = PBXGroup;
 			children = (
-				568A291C2BADDF2E0071849C /* examples */,
 				568A29132BADDF190071849C /* AUTHORS */,
 				568A29142BADDF190071849C /* BUILDING.txt */,
 				568A29122BADDF180071849C /* LICENSE */,
@@ -794,10 +796,12 @@
 				568A290F2BADB57B0071849C /* ShowServer.vcxproj */,
 				568A29112BADB57B0071849C /* ShowServer.vcxproj.filters */,
 				568A290E2BADB4DD0071849C /* CMakeLists.txt */,
+				568A291C2BADDF2E0071849C /* examples */,
 				568A04CB2BAB27F80071849C /* thirdparty */,
 				568A01F72BAB21430071849C /* common */,
 				568A01CA2BAB1B670071849C /* ShowServer */,
 				568A01C92BAB1B670071849C /* Products */,
+				568A2C662BAF84F50071849C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1818,6 +1822,14 @@
 				568A29192BADDF2E0071849C /* server.cfg */,
 			);
 			path = examples;
+			sourceTree = "<group>";
+		};
+		568A2C662BAF84F50071849C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				568A2C672BAF84F50071849C /* CoreFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
