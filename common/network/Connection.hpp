@@ -6,6 +6,7 @@
 #include <functional>
 #include <memory>
 #include <string>
+#include <ostream>
 
 #include "asio.hpp"
 
@@ -43,14 +44,18 @@ private:
 public:
     static auto resolve(const std::string &ipaddress, std::uint16_t port) -> asio::ip::tcp::endpoint ;
 
+    std::string handle ;
+    
     Connection(asio::io_context &context);
     ~Connection() ;
     
     auto socket() -> asio::ip::tcp::socket& ;
-    auto close() -> void ;
+    auto close(const std::string &logfile = "") -> void ;
     auto is_open() const -> bool;
     auto read() -> void ;
-
+    
+    auto log(std::ostream &output, bool state) -> void ;
+    
     auto setPeer() -> void ;
     auto peer() const -> std::string;
     auto clearPeer() -> void ;

@@ -19,35 +19,8 @@
 #include "network/FrameValue.hpp"
 
 
-// =========================================================================
-struct ConnectionState {
-    std::string identity ;
-    bool state ;
-    std::string timestamp ;
-    std::string name ;
-    
-    ConnectionState(const std::string &connection_identity, const std::string &time_marker, const std::string &client_name,  bool connection_state);
-    auto describe() const -> std::string ;
-};
 
-// =========================================================================
-class StateHolder {
-    mutable std::mutex access ;
-    std::queue<ConnectionState> states ;
-    auto add(ConnectionState &state) -> void ;
-    auto retrieve() -> std::queue<ConnectionState> ;
-    auto clear() -> void ;
-};
 
-// =========================================================================
-struct NameHolder {
-    std::unordered_map<std::string, std::string> name_mapping ;
-    static const std::string unknownKey ;
-    auto clear() -> void ;
-    auto add(const std::string &identity, const std::string &name) -> void ;
-    auto operator[](const std::string &key) const -> const std::string& ;
-    auto remove(const std::string &identity) -> void ;
-};
 class Listener ;
 class ConnectionHolder ;
 using ConnectionHolderPointer = std::shared_ptr<ConnectionHolder>;
@@ -58,8 +31,6 @@ class ConnectionHolder {
     std::string connectionLog ;
     std::string errorLog;
     
-    NameHolder nameMapping ;
-    
     util::ourclock::time_point lastWrite ;
     std::deque<ConnectionPointer> connections ;
     mutable std::mutex access ;
@@ -67,7 +38,6 @@ class ConnectionHolder {
     auto processPacket(Packet packet, ConnectionPointer connection) -> bool ;
     auto processClose(ConnectionPointer connection) -> void ;
     
-    auto logConnection(ConnectionPointer &connection, bool state)-> void ;
     auto logError(ConnectionPointer &connection, ErrorPacket *error)-> void ;
     
 public:

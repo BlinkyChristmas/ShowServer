@@ -1,43 +1,14 @@
 // Copyright © 2024 Charles Kerr. All rights reserved.
 
 #include "Connection.hpp"
+
+#include <fstream>
+
 #include "utility/dbgutil.hpp"
+#include "utility/strutil.hpp"
 
 using namespace std::string_literals ;
 
-//======================================================================
-auto Connection::resolve(const std::string &ipaddress, std::uint16_t port) -> asio::ip::tcp::endpoint {
-    try {
-        asio::io_context io_context ;
-        asio::ip::tcp::resolver resolver(io_context) ;
-        asio::ip::tcp::resolver::query query(ipaddress.c_str(),"") ;
-        auto iter = resolver.resolve(query) ;
-        if (iter != asio::ip::tcp::resolver::iterator()) {
-            auto serverEndpoint = iter->endpoint() ;
-            // Now we need to add the port
-            return asio::ip::tcp::endpoint(serverEndpoint.address(),port) ;
-        }
-        return  asio::ip::tcp::endpoint() ;
-    }
-    catch(...) {
-        return  asio::ip::tcp::endpoint() ;
-    }
-    
-}
-
-// =====================================================================
-Connection::Connection(asio::io_context &context):netSocket(context), incomingAmount(0), processingCallback(nullptr), closeCallback(nullptr), connectTime(util::ourclock::now()), lastRead(util::ourclock::now()), lastWrite(util::ourclock::now()) {
-    
-}
-
-// =====================================================================
-Connection::~Connection(){
-    this->setCloseCallback(nullptr) ;
-    this->setPacketRoutine(nullptr) ;
-    if (netSocket.is_open()) {
-        netSocket.close();
-    }
-}
 //======================================================================
 auto Connection::read(int amount, int offset) -> void {
     if (netSocket.is_open()) {
@@ -57,6 +28,8 @@ auto Connection::readHandler(const asio::error_code& ec, size_t bytes_transferre
                 DBGLCK(std::cout, "Connection calling close callback");
                 closeCallback(this->shared_from_this()) ;
             }
+            closeCallback = nullptr ;
+            processingCallback = nullptr ;
             if (netSocket.is_open()) {
                 netSocket.close() ;
             }
@@ -92,20 +65,64 @@ auto Connection::readHandler(const asio::error_code& ec, size_t bytes_transferre
     }
 }
 
+//======================================================================
+auto Connection::resolve(const std::string &ipaddress, std::uint16_t port) -> asio::ip::tcp::endpoint {
+    try {
+        asio::io_context io_context ;
+        asio::ip::tcp::resolver resolver(io_context) ;
+        asio::ip::tcp::resolver::query query(ipaddress.c_str(),"") ;
+        auto iter = resolver.resolve(query) ;
+        if (iter != asio::ip::tcp::resolver::iterator()) {
+            auto serverEndpoint = iter->endpoint() ;
+            // Now we need to add the port
+            return asio::ip::tcp::endpoint(serverEndpoint.address(),port) ;
+        }
+        return  asio::ip::tcp::endpoint() ;
+    }
+    catch(...) {
+        return  asio::ip::tcp::endpoint() ;
+    }
+    
+}
+
+// =====================================================================
+Connection::Connection(asio::io_context &context):netSocket(context), incomingAmount(0), processingCallback(nullptr), closeCallback(nullptr), connectTime(util::ourclock::now()), lastRead(util::ourclock::now()), lastWrite(util::ourclock::now()) {
+    
+}
+
+// =====================================================================
+Connection::~Connection(){
+    this->setCloseCallback(nullptr) ;
+    this->setPacketRoutine(nullptr) ;
+    if (netSocket.is_open()) {
+        netSocket.close();
+    }
+}
+
 // ===========================================================================================
 auto Connection::socket() -> asio::ip::tcp::socket& {
     return netSocket ;
 }
 
 // ===========================================================================================
-auto Connection::close() -> void {
+auto Connection::close(const std::string &logfile ) -> void {
     try {
+        if (!logfile.empty()) {
+            auto output = std::ofstream(logfile,std::ios::app) ;
+            if (output.is_open()){
+                this->log(output, false) ;
+            }
+        }
+        closeCallback = nullptr ;
+        processingCallback = nullptr ;
+        
         if (netSocket.is_open()) {
             netSocket.close() ;
         }
     }
     catch(...) {}
 }
+
 //======================================================================
 auto Connection::is_open() const -> bool{
     return netSocket.is_open() ;
@@ -119,6 +136,17 @@ auto Connection::read() -> void {
     }
 }
 
+//======================================================================
+auto Connection::log(std::ostream &output, bool state) -> void {
+    // the format is: name = timestamp , state(Connected/Disconnected) , ipaddress
+    static auto const format = "%s = %s , %s , %s"s ;
+    auto time = this->connectTime ;
+    if (!state && netSocket.is_open()) {
+        time = util::ourclock::now() ;
+    }
+    DBGLCK(std::cout, util::format(format, this->handle.c_str() , util::sysTimeToString(time).c_str() ,  (state?"Connected":"Disconnected") , this->peer().c_str()));
+    output << util::format(format, this->handle.c_str() , util::sysTimeToString(time).c_str() ,  (state?"Connected":"Disconnected") , this->peer().c_str()) << std::endl;
+}
 //======================================================================
 auto Connection::setPeer() -> void {
     if (netSocket.is_open()) {
