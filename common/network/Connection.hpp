@@ -7,6 +7,7 @@
 #include <memory>
 #include <string>
 #include <ostream>
+#include <mutex>
 
 #include "asio.hpp"
 
@@ -36,6 +37,7 @@ private:
 
     auto read(int amount, int offset) -> void ;
     auto readHandler(const asio::error_code& ec, size_t bytes_transferred) -> void ;
+    //mutable std::recursive_mutex read_access;
 
     PacketProcessing processingCallback ;
     CloseCallback closeCallback ;
@@ -45,7 +47,6 @@ public:
     static auto resolve(const std::string &ipaddress, std::uint16_t port) -> asio::ip::tcp::endpoint ;
 
     std::string handle ;
-    
     Connection(asio::io_context &context);
     ~Connection() ;
     

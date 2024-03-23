@@ -13,29 +13,30 @@ using namespace std::string_literals ;
 auto Connection::read(int amount, int offset) -> void {
     if (netSocket.is_open()) {
         incomingAmount = amount ;
-        asio::async_read(this->netSocket,asio::buffer(incomingPacket.data.data()+offset,amount),std::bind(&Connection::readHandler,this,std::placeholders::_1,std::placeholders::_2));
+        asio::async_read(this->netSocket,asio::buffer(incomingPacket.data.data()+offset,amount),std::bind(&Connection::readHandler,this->shared_from_this(), std::placeholders::_1, std::placeholders::_2));
     }
 }
 
 //======================================================================
 auto Connection::readHandler(const asio::error_code& ec, size_t bytes_transferred) -> void {
     if (ec) {
-        DBGMSG(std::cerr, "Error on read: "s + ec.message());
+        //DBGMSG(std::cerr, "Error on read: "s + ec.message());
         try {
             this->timestamp() ; // mark the event
             // We got an error, so we wont requeue our read
             if (closeCallback != nullptr) {
-                DBGLCK(std::cout, "Connection calling close callback");
+               // DBGLCK(std::cout, "Connection calling close callback");
                 closeCallback(this->shared_from_this()) ;
             }
             closeCallback = nullptr ;
             processingCallback = nullptr ;
             if (netSocket.is_open()) {
-                netSocket.close() ;
+                netSocket.close();
             }
-            
+           
         }
         catch(...){}
+
         return ;
         
     }
@@ -63,6 +64,7 @@ auto Connection::readHandler(const asio::error_code& ec, size_t bytes_transferre
     if (status) {
         this->read() ;
     }
+
 }
 
 //======================================================================
@@ -92,11 +94,7 @@ Connection::Connection(asio::io_context &context):netSocket(context), incomingAm
 
 // =====================================================================
 Connection::~Connection(){
-    this->setCloseCallback(nullptr) ;
-    this->setPacketRoutine(nullptr) ;
-    if (netSocket.is_open()) {
-        netSocket.close();
-    }
+    this->close();
 }
 
 // ===========================================================================================
@@ -115,8 +113,7 @@ auto Connection::close(const std::string &logfile ) -> void {
         }
         closeCallback = nullptr ;
         processingCallback = nullptr ;
-        
-        if (netSocket.is_open()) {
+         if (netSocket.is_open()) {
             netSocket.close() ;
         }
     }

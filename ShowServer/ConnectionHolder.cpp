@@ -104,7 +104,7 @@ auto ConnectionHolder::sendPacket(const Packet &packet) -> void {
     auto lock = std::lock_guard(access) ;
     
     for (auto iter = connections.begin();iter != connections.end();) {
-        if ( !(*iter)->is_open()) {
+        if ( !(*iter)->is_open() ) {
             (*iter)->close() ;
             iter = connections.erase(iter);
         }
@@ -121,7 +121,7 @@ auto ConnectionHolder::sendSync(FrameValue &value) -> void {
     lastWrite = util::ourclock::now() ;
     auto lock = std::lock_guard(access) ;
     for (auto iter = connections.begin();iter != connections.end();) {
-        if ( !(*iter)->is_open()) {
+        if ( !(*iter)->is_open() ) {
             (*iter)->close() ;
             iter = connections.erase(iter);
         }
@@ -144,7 +144,7 @@ auto ConnectionHolder::sendPlay(bool state, const FrameValue &value ) -> void {
     lastWrite = util::ourclock::now() ;
     auto packet = PlayPacket(state) ;
     for (auto iter = connections.begin();iter != connections.end();) {
-        if ( !(*iter)->is_open()) {
+        if ( !(*iter)->is_open() ) {
             (*iter)->close() ;
             iter = connections.erase(iter);
         }
@@ -172,9 +172,15 @@ auto ConnectionHolder::size() const  -> size_t {
 auto ConnectionHolder::clear() -> void {
     auto lock = std::lock_guard(access) ;
     for (auto iter = connections.begin() ; iter != connections.end();) {
-        if ( (*iter)->is_open()) {
-            // He hasn't been logged yet
-            (*iter)->close(connectionLog) ;
+        if ( !(*iter)->is_open())  {
+            DBGMSG(std::cout, "Clearing: "s + (*iter)->handle);
+            // Has been logged yet
+            (*iter)->close() ;
+        }
+        else {
+            DBGMSG(std::cout, "Clearing: "s + (*iter)->handle + " and logging it");
+
+            (*iter)->close(connectionLog);
         }
         iter = connections.erase(iter) ;
     }

@@ -14,7 +14,7 @@
 
 class Connection ;
 class Show;
-class Listener {
+class Listener : public std::enable_shared_from_this<Listener> {
     asio::io_context connection_context ;
     asio::ip::tcp::acceptor acceptor;
     asio::io_context client_context ;
@@ -36,5 +36,6 @@ public:
     auto listen(std::uint16_t port) -> bool ;
     bool isListening;
     auto close() -> void ;
+    auto stop() -> void;
 };
 #endif /* Listener_hpp */

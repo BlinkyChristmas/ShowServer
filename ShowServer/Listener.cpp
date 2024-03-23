@@ -33,28 +33,46 @@ Listener::Listener(ConnectionHolderPointer holder, std::shared_ptr<Show> showPtr
 
 // ===================================================================
 Listener::~Listener() {
-    if (acceptor.is_open()) {
-        acceptor.close() ;
-    }
+    this->close();
+
+ }
+// ===================================================================
+auto Listener::close()-> void {
+    this->stop();
+
     connectionHolder->clear();
-    if (!client_context.stopped()){
+
+    if (!client_context.stopped()) {
         client_context.stop();
-    }
-    if (!connection_context.stopped()){
-        connection_context.stop();
     }
     if (client_thread.joinable()) {
         client_thread.join();
     }
-    if (connection_thread.joinable()){
-        connection_thread.join();
+ 
+}
+// ===================================================================
+auto Listener::stop()-> void {
+    if (acceptor.is_open()) {
+        acceptor.close();
     }
+
+    if (!connection_context.stopped()) {
+        connection_context.stop();
+    }
+    if (connection_thread.joinable()) {
+        connection_thread.join();
+        connection_thread = std::thread();
+    }
+
 }
 
 // ===================================================================
 auto Listener::handleConnect(std::shared_ptr<Connection> client ,const asio::error_code& ec) -> void  {
     if (ec) {
-        DBGMSG(std::cerr,"Error on connection: "s + ec.message());
+        DBGMSG(std::cerr,"Listener Error on connection: "s + ec.message());
+        if (acceptor.is_open()) {
+            acceptor.close();
+        }
         return ;
     }
     
@@ -149,25 +167,8 @@ auto Listener::listen(std::uint16_t port) -> bool {
     }
     auto newclient = std::make_shared<Connection>(client_context) ;
     connection_context.restart() ;
-    acceptor.async_accept(newclient->socket() , std::bind(&Listener::handleConnect,this, newclient,std::placeholders::_1)) ;
+    acceptor.async_accept(newclient->socket() , std::bind(&Listener::handleConnect,this, newclient, std::placeholders::_1));
     connection_thread = std::thread(&Listener::runConnections,this) ;
     return true ;
 }
 
-// ==========================================================================================
-auto Listener::close() -> void {
-    
-    DBGMSG(std::cout, "Closing Listener");
-    if (acceptor.is_open()) {
-        acceptor.close() ;
-    }
-    if (connection_thread.joinable()) {
-        connection_thread.join();
-        connection_thread = std::thread() ;
-    }
-    
-    if (client_thread.joinable()) {
-        client_thread.join();
-        client_thread = std::thread() ;
-    }
-}
