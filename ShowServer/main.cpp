@@ -219,7 +219,7 @@ auto runLoop(ConfigFile &config,std::filesystem::path &config_file) -> void {
                 // Log to server log!
                 listener.close() ;
                 auto output = std::ofstream(config.serverlog, std::ios::app) ;
-                auto msg = "STATE = "s +"ON,"s + ",OFF,"s  + "OFF,"s + util::sysTimeToString(util::ourclock::now()) ;
+                auto msg = "STATE = "s +"ON,"s + "OFF,"s  + "OFF,"s + util::sysTimeToString(util::ourclock::now()) ;
                 if (output.is_open()) {
                     output << msg << std::endl;
                     output.close();
