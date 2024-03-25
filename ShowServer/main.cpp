@@ -69,6 +69,15 @@ auto runLoop(ConfigFile &config,std::filesystem::path &config_file) -> void {
             output.close();
         }
     }
+    {
+        auto output = std::ofstream(config.serverlog,std::ios::app) ;
+        
+        if (output.is_open()) {
+            auto msg = "STATE = OFF, OFF, OFF, "s + util::sysTimeToString(util::ourclock::now()) ;
+            output << msg << std::endl;
+            output.close() ;
+        }
+    }
 
     auto connections = std::make_shared<ConnectionHolder>() ;
     connections->setLogs(config.connectlog, config.errorlog);
@@ -193,7 +202,6 @@ auto runLoop(ConfigFile &config,std::filesystem::path &config_file) -> void {
                         output.close() ;
                     }
 
-                    // Log the server log!
                 }
                 
                 if (!inShow) {
@@ -219,9 +227,30 @@ auto runLoop(ConfigFile &config,std::filesystem::path &config_file) -> void {
                 
             }
             else if (!config.listenTime.inRange() && listener.isListening && inShow) {
-                if (show->shouldStop != true) {
-                    DBGMSG(std::cout, "Tell the show it should stop");
-                    show->shouldStop = true;
+                if (show->showPlaying){
+                    if (show->shouldStop != true) {
+                        DBGMSG(std::cout, "Tell the show it should stop");
+                        show->shouldStop = true;
+                    }
+                }
+                else {
+                    DBGMSG(std::cout, "Send Show Stop");
+
+                    // we need to send a show stop
+                    inShow = false ;
+                    inStartRange = false ;
+                    songPlaying = false;
+                    auto packet = ShowPacket(false) ;
+                    connections->sendPacket(packet) ;
+                    // We should log the server log!
+                    auto output = std::ofstream(config.serverlog,std::ios::app) ;
+                    
+                    if (output.is_open()) {
+                        auto msg = "STATE = ON, ON, OFF, "s + util::sysTimeToString(util::ourclock::now()) ;
+                        output << msg << std::endl;
+                        output.close() ;
+                    }
+
                 }
             }
             std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -233,6 +262,23 @@ auto runLoop(ConfigFile &config,std::filesystem::path &config_file) -> void {
             }
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
+        if (inShow) {
+            // we need to send a show stop
+            inShow = false ;
+            inStartRange = false ;
+            songPlaying = false;
+            auto packet = ShowPacket(false) ;
+            connections->sendPacket(packet) ;
+            // We should log the server log!
+            auto output = std::ofstream(config.serverlog,std::ios::app) ;
+            
+            if (output.is_open()) {
+                auto msg = "STATE = ON, ON, OFF, "s + util::sysTimeToString(util::ourclock::now()) ;
+                output << msg << std::endl;
+                output.close() ;
+            }
+
+        }
         // We are shutting down for good!
         if (listener.isListening) {
             //std::cout << "Stopping listener" << std::endl;
@@ -242,6 +288,12 @@ auto runLoop(ConfigFile &config,std::filesystem::path &config_file) -> void {
             std::this_thread::sleep_for(std::chrono::seconds(1)) ; // Allow things to settle
             //std::cout << "Closing listener " << std::endl;
             listener.close() ;
+            auto output = std::ofstream(config.serverlog, std::ios::app) ;
+            if (output.is_open()) {
+                auto msg = "STATE = ON, OFF, OFF, "s + util::sysTimeToString(util::ourclock::now()) ;
+                output << msg << std::endl;
+                output.close() ;
+            }
         }
         
     }
