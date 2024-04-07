@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		56E9753E2BC15D9900AA1B50 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E9753D2BC15D9900AA1B50 /* main.cpp */; };
 		56E975B72BC1609F00AA1B50 /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E975922BC1609F00AA1B50 /* Connection.cpp */; };
-		56E975B82BC1609F00AA1B50 /* FrameTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E975942BC1609F00AA1B50 /* FrameTimer.cpp */; };
 		56E975B92BC1609F00AA1B50 /* FrameValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E975962BC1609F00AA1B50 /* FrameValue.cpp */; };
 		56E975BA2BC1609F00AA1B50 /* ErrorPacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E9759A2BC1609F00AA1B50 /* ErrorPacket.cpp */; };
 		56E975BB2BC1609F00AA1B50 /* IdentPacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E9759C2BC1609F00AA1B50 /* IdentPacket.cpp */; };
@@ -30,6 +29,8 @@
 		56E975FA2BC1BD9B00AA1B50 /* ClientHolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E975F82BC1BD9B00AA1B50 /* ClientHolder.cpp */; };
 		56E975FD2BC1C85F00AA1B50 /* StateHolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E975FB2BC1C85F00AA1B50 /* StateHolder.cpp */; };
 		56E976002BC2039800AA1B50 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E975FE2BC2039800AA1B50 /* Logger.cpp */; };
+		56E976082BC2BB4400AA1B50 /* PlayList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E976062BC2BB4400AA1B50 /* PlayList.cpp */; };
+		56E9760B2BC2BBBB00AA1B50 /* Show.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E976092BC2BBBB00AA1B50 /* Show.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,8 +50,6 @@
 		56E9753D2BC15D9900AA1B50 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		56E975922BC1609F00AA1B50 /* Connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Connection.cpp; sourceTree = "<group>"; };
 		56E975932BC1609F00AA1B50 /* Connection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Connection.hpp; sourceTree = "<group>"; };
-		56E975942BC1609F00AA1B50 /* FrameTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameTimer.cpp; sourceTree = "<group>"; };
-		56E975952BC1609F00AA1B50 /* FrameTimer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FrameTimer.hpp; sourceTree = "<group>"; };
 		56E975962BC1609F00AA1B50 /* FrameValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameValue.cpp; sourceTree = "<group>"; };
 		56E975972BC1609F00AA1B50 /* FrameValue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FrameValue.hpp; sourceTree = "<group>"; };
 		56E975992BC1609F00AA1B50 /* allpackets.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = allpackets.hpp; sourceTree = "<group>"; };
@@ -95,6 +94,15 @@
 		56E975FE2BC2039800AA1B50 /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
 		56E975FF2BC2039800AA1B50 /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
 		56E976022BC20DF000AA1B50 /* server.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = server.cfg; sourceTree = "<group>"; };
+		56E976062BC2BB4400AA1B50 /* PlayList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayList.cpp; sourceTree = "<group>"; };
+		56E976072BC2BB4400AA1B50 /* PlayList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayList.hpp; sourceTree = "<group>"; };
+		56E976092BC2BBBB00AA1B50 /* Show.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Show.cpp; sourceTree = "<group>"; };
+		56E9760A2BC2BBBB00AA1B50 /* Show.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Show.hpp; sourceTree = "<group>"; };
+		56E9760C2BC2F76C00AA1B50 /* playlist.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = playlist.cfg; sourceTree = "<group>"; };
+		56E9760D2BC3224300AA1B50 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		56E9760E2BC3224300AA1B50 /* BUILDING.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUILDING.txt; sourceTree = "<group>"; };
+		56E9760F2BC3224300AA1B50 /* AUTHORS */ = {isa = PBXFileReference; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
+		56E976102BC3224300AA1B50 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +119,10 @@
 		56E975312BC15D9900AA1B50 = {
 			isa = PBXGroup;
 			children = (
+				56E9760F2BC3224300AA1B50 /* AUTHORS */,
+				56E9760E2BC3224300AA1B50 /* BUILDING.txt */,
+				56E976102BC3224300AA1B50 /* CMakeLists.txt */,
+				56E9760D2BC3224300AA1B50 /* LICENSE */,
 				56E976032BC20DF000AA1B50 /* examples */,
 				56E975C62BC160A400AA1B50 /* thirdparty */,
 				56E975B62BC1609F00AA1B50 /* common */,
@@ -130,19 +142,23 @@
 		56E9753C2BC15D9900AA1B50 /* ShowServer */ = {
 			isa = PBXGroup;
 			children = (
-				56E9753D2BC15D9900AA1B50 /* main.cpp */,
-				56E975CE2BC169A600AA1B50 /* ServerConfiguration.cpp */,
-				56E975CF2BC169A600AA1B50 /* ServerConfiguration.hpp */,
-				56E975F22BC194FA00AA1B50 /* ServerClient.cpp */,
-				56E975F32BC194FA00AA1B50 /* ServerClient.hpp */,
-				56E975F52BC1BA5E00AA1B50 /* Listener.cpp */,
-				56E975F62BC1BA5E00AA1B50 /* Listener.hpp */,
 				56E975F82BC1BD9B00AA1B50 /* ClientHolder.cpp */,
 				56E975F92BC1BD9B00AA1B50 /* ClientHolder.hpp */,
-				56E975FB2BC1C85F00AA1B50 /* StateHolder.cpp */,
-				56E975FC2BC1C85F00AA1B50 /* StateHolder.hpp */,
+				56E975F52BC1BA5E00AA1B50 /* Listener.cpp */,
+				56E975F62BC1BA5E00AA1B50 /* Listener.hpp */,
 				56E975FE2BC2039800AA1B50 /* Logger.cpp */,
 				56E975FF2BC2039800AA1B50 /* Logger.hpp */,
+				56E9753D2BC15D9900AA1B50 /* main.cpp */,
+				56E976062BC2BB4400AA1B50 /* PlayList.cpp */,
+				56E976072BC2BB4400AA1B50 /* PlayList.hpp */,
+				56E975F22BC194FA00AA1B50 /* ServerClient.cpp */,
+				56E975F32BC194FA00AA1B50 /* ServerClient.hpp */,
+				56E975CE2BC169A600AA1B50 /* ServerConfiguration.cpp */,
+				56E975CF2BC169A600AA1B50 /* ServerConfiguration.hpp */,
+				56E976092BC2BBBB00AA1B50 /* Show.cpp */,
+				56E9760A2BC2BBBB00AA1B50 /* Show.hpp */,
+				56E975FB2BC1C85F00AA1B50 /* StateHolder.cpp */,
+				56E975FC2BC1C85F00AA1B50 /* StateHolder.hpp */,
 			);
 			path = ShowServer;
 			sourceTree = "<group>";
@@ -152,8 +168,6 @@
 			children = (
 				56E975922BC1609F00AA1B50 /* Connection.cpp */,
 				56E975932BC1609F00AA1B50 /* Connection.hpp */,
-				56E975942BC1609F00AA1B50 /* FrameTimer.cpp */,
-				56E975952BC1609F00AA1B50 /* FrameTimer.hpp */,
 				56E975962BC1609F00AA1B50 /* FrameValue.cpp */,
 				56E975972BC1609F00AA1B50 /* FrameValue.hpp */,
 			);
@@ -231,6 +245,7 @@
 		56E976032BC20DF000AA1B50 /* examples */ = {
 			isa = PBXGroup;
 			children = (
+				56E9760C2BC2F76C00AA1B50 /* playlist.cfg */,
 				56E976022BC20DF000AA1B50 /* server.cfg */,
 			);
 			path = examples;
@@ -298,7 +313,6 @@
 				56E975C42BC1609F00AA1B50 /* mapfile.cpp in Sources */,
 				56E975D02BC169A600AA1B50 /* ServerConfiguration.cpp in Sources */,
 				56E975FD2BC1C85F00AA1B50 /* StateHolder.cpp in Sources */,
-				56E975B82BC1609F00AA1B50 /* FrameTimer.cpp in Sources */,
 				56E975C02BC1609F00AA1B50 /* PlayPacket.cpp in Sources */,
 				56E975BB2BC1609F00AA1B50 /* IdentPacket.cpp in Sources */,
 				56E975BE2BC1609F00AA1B50 /* Packet.cpp in Sources */,
@@ -313,10 +327,12 @@
 				56E975BC2BC1609F00AA1B50 /* LoadPacket.cpp in Sources */,
 				56E975C12BC1609F00AA1B50 /* ShowPacket.cpp in Sources */,
 				56E975BF2BC1609F00AA1B50 /* PacketType.cpp in Sources */,
+				56E9760B2BC2BBBB00AA1B50 /* Show.cpp in Sources */,
 				56E975B72BC1609F00AA1B50 /* Connection.cpp in Sources */,
 				56E975FA2BC1BD9B00AA1B50 /* ClientHolder.cpp in Sources */,
 				56E975B92BC1609F00AA1B50 /* FrameValue.cpp in Sources */,
 				56E975F72BC1BA5E00AA1B50 /* Listener.cpp in Sources */,
+				56E976082BC2BB4400AA1B50 /* PlayList.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

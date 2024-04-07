@@ -21,18 +21,5 @@ public:
     auto rawValue() -> int ;
 };
 
-// ==================================================================================================
-// A container for the syncs that occurr
-// ==================================================================================================
-
-class FrameContainer {
-    mutable std::mutex access ;
-    std::queue<FrameValue> dataHolder ;
-public:
-    auto empty() const -> bool ;
-    auto clear() -> void ;
-    auto push(const FrameValue &value) -> void ;
-    auto pop() -> FrameValue ;
-};
 
 #endif /* FrameValue_hpp */

@@ -11,6 +11,7 @@
 #include "ServerClient.hpp"
 #include "packets/Packet.hpp"
 #include "network/FrameValue.hpp"
+#include "utility/timeutil.hpp"
 
 class ClientHolder ;
 
@@ -19,6 +20,7 @@ using ClientHolderPointer = std::shared_ptr<ClientHolder> ;
 class ClientHolder {
     std::vector<ClientPointer> clients ;
     mutable std::mutex accessControl ;
+    util::ourclock::time_point lastWrite ;
     
 public:
     ClientHolder() = default ;
@@ -32,6 +34,7 @@ public:
     auto sendShow(bool state) -> void ;
     
     auto clear() -> void ;
+    auto checkRefresh(int seconds) -> void ;
 };
 
 #endif /* ClientHolder_hpp */

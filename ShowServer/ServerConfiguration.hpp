@@ -17,7 +17,7 @@ public:
     util::HourRange showTime ;
     util::HourRange listenTime ;
     util::MonthRange runSpan ;
-    util::HourRange startRange;
+    util::HourRange activeRange;
     std::string connectlog ;
     std::string errorlog ;
     std::string serverlog ;

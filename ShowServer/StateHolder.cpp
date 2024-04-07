@@ -10,7 +10,7 @@
 using namespace std::string_literals ;
 
 const std::vector<std::string> StateHolder::STATENAMES{
-    "Run"s,"Listening"s,"Start"s,"Show"s,"Play"s
+    "Run"s,"Listening"s,"Active"s,"Show"s,"Play"s
 };
 
 // ========================================================================

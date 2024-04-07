@@ -26,35 +26,3 @@ auto FrameValue::rawValue() -> int {
     return frame ;
 }
 
-// ==================================================================================================
-// A container for the syncs that occurr
-// ==================================================================================================
-auto FrameContainer::empty() const -> bool {
-    auto lock = std::lock_guard(access);
-    return dataHolder.empty();
-}
-
-// ==================================================================================================
-auto FrameContainer::clear() -> void {
-    std::queue<FrameValue> empty;
-    auto lock = std::lock_guard(access);
-
-    std::swap(empty,dataHolder);
-}
-
-// ==================================================================================================
-auto FrameContainer::push(const FrameValue &value) -> void {
-    auto lock = std::lock_guard(access);
-    dataHolder.push(value) ;
-}
-
-// ==================================================================================================
-auto FrameContainer::pop() -> FrameValue {
-    auto lock = std::lock_guard(access);
-    if (dataHolder.empty()) {
-        throw std::runtime_error("Attempt to retrieve FrameValue from an empty container");
-    }
-    auto value = dataHolder.front();
-    dataHolder.pop();
-    return value;
-}

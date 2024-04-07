@@ -35,9 +35,13 @@ auto ServerConfiguration::processKeyValue(const std::string &key, const std::str
     }
     else if (ukey == "SHOW") {
         showTime = util::HourRange(value) ;
+        activeRange = showTime ;
+        activeRange.startTime = showTime.startTime - delay ;
     }
     else if (ukey == "DELAY") {
         delay = std::stoi(value,nullptr,0) ;
+        activeRange.startTime = showTime.startTime - delay ;
+
     }
     else if (ukey == "PLAYLIST") {
         playlist = std::filesystem::path(value) ;

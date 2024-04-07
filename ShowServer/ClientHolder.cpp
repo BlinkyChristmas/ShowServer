@@ -13,6 +13,7 @@ auto ClientHolder::add(ClientPointer client) -> void {
 // ================================================================================
 auto ClientHolder::send(const Packet &packet) -> void {
     auto lock = std::lock_guard(accessControl) ;
+    
     for (auto iter = clients.begin();iter!= clients.end();){
         if ((*iter)->is_open()){
             if ((*iter)->send(packet) ) {
@@ -28,6 +29,7 @@ auto ClientHolder::send(const Packet &packet) -> void {
             
         }
     }
+    lastWrite = util::ourclock::now() ;
 }
 
 // ================================================================================
@@ -49,6 +51,8 @@ auto ClientHolder::sendSync(const FrameValue &frame) -> void {
             
         }
     }
+    lastWrite = util::ourclock::now() ;
+
 }
 
 // ============================================================================
@@ -70,6 +74,8 @@ auto ClientHolder::sendPlay(bool state, const FrameValue &frame) -> void {
             
         }
     }
+    lastWrite = util::ourclock::now() ;
+
 }
 
 // ============================================================================
@@ -99,4 +105,12 @@ auto ClientHolder::clear() -> void {
         }
     }
     clients.clear() ;
+}
+
+// ============================================================================
+auto ClientHolder::checkRefresh(int seconds) -> void {
+    auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(util::ourclock::now()-lastWrite).count() ;
+    if (elapsed > seconds) {
+        this->sendNop();
+    }
 }

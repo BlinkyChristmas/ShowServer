@@ -12,7 +12,7 @@ class StateHolder{
     static const std::vector<std::string> STATENAMES ;
 public:
     enum State{
-        running=0,listening,startrange,inshow,playing
+        running=0,listening,activerange,inshow,playing
     };
     StateHolder() ;
     StateHolder(const std::string &name) ;

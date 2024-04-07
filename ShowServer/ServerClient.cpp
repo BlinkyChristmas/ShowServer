@@ -59,6 +59,7 @@ auto ServerClient::close() -> void {
     if (connection == nullptr) {
         return  ;
     }
+    connection->shutdown() ;
     connection->close() ;
 }
 
