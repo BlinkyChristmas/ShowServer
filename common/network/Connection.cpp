@@ -262,9 +262,19 @@ auto Connection::readExpired(int seconds) -> bool {
 }
 
 //======================================================================
+auto Connection::clearReadTime() -> void {
+    lastRead = util::ourclock::now() ;
+}
+
+//======================================================================
 auto Connection::writeExpired(int seconds) -> bool {
     auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(util::ourclock::now()-lastWrite).count() ;
     return elapsed > seconds ;
+}
+
+//======================================================================
+auto Connection::clearWriteTime() -> void {
+    lastWrite = util::ourclock::now() ;
 }
 
 //======================================================================

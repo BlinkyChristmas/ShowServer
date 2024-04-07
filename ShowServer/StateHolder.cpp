@@ -4,10 +4,14 @@
 
 #include "utility/timeutil.hpp"
 #include "utility/strutil.hpp"
+#include "utility/dbgutil.hpp"
 #include <fstream>
 
 using namespace std::string_literals ;
 
+const std::vector<std::string> StateHolder::STATENAMES{
+    "Run"s,"Listening"s,"Start"s,"Show"s,"Play"s
+};
 
 // ========================================================================
 auto StateHolder::log(const std::string &logfile) -> bool {
@@ -15,7 +19,7 @@ auto StateHolder::log(const std::string &logfile) -> bool {
         return false ;
     }
     auto msg = "STATE = "s + this->describe() + ", "s +  util::sysTimeToString(util::ourclock::now());
-
+    DBGMSG(std::cout,msg) ;
     auto output = std::ofstream(logfile,std::ios::app) ;
     if (!output.is_open()) {
         return false ;
@@ -53,11 +57,11 @@ auto StateHolder::stateFor(State position) const -> bool {
 // ========================================================================
 auto StateHolder::describe() const -> std::string {
     auto msg = ""s ;
-    for (auto entry: states) {
+    for (auto i=0; i < 5; i++){
         if (!msg.empty()){
-            msg+= ", "s ;
+            msg += ", "s ;
         }
-        msg += (entry?"ON"s:"OFF"s)  ;
+        msg +=  STATENAMES[i] + " - "s +( states[i]?"ON"s:"OFF"s)  ;
     }
     return msg ;
 }

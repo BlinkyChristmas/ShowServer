@@ -21,6 +21,7 @@ class ClientHolder {
     mutable std::mutex accessControl ;
     
 public:
+    ClientHolder() = default ;
     auto add(ClientPointer client) -> void ;
     auto send(const Packet &packet) -> void ;
     

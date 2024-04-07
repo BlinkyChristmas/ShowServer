@@ -29,6 +29,7 @@
 		56E975F72BC1BA5E00AA1B50 /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E975F52BC1BA5E00AA1B50 /* Listener.cpp */; };
 		56E975FA2BC1BD9B00AA1B50 /* ClientHolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E975F82BC1BD9B00AA1B50 /* ClientHolder.cpp */; };
 		56E975FD2BC1C85F00AA1B50 /* StateHolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E975FB2BC1C85F00AA1B50 /* StateHolder.cpp */; };
+		56E976002BC2039800AA1B50 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E975FE2BC2039800AA1B50 /* Logger.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -91,6 +92,9 @@
 		56E975F92BC1BD9B00AA1B50 /* ClientHolder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ClientHolder.hpp; sourceTree = "<group>"; };
 		56E975FB2BC1C85F00AA1B50 /* StateHolder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StateHolder.cpp; sourceTree = "<group>"; };
 		56E975FC2BC1C85F00AA1B50 /* StateHolder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateHolder.hpp; sourceTree = "<group>"; };
+		56E975FE2BC2039800AA1B50 /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
+		56E975FF2BC2039800AA1B50 /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
+		56E976022BC20DF000AA1B50 /* server.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = server.cfg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 		56E975312BC15D9900AA1B50 = {
 			isa = PBXGroup;
 			children = (
+				56E976032BC20DF000AA1B50 /* examples */,
 				56E975C62BC160A400AA1B50 /* thirdparty */,
 				56E975B62BC1609F00AA1B50 /* common */,
 				56E9753C2BC15D9900AA1B50 /* ShowServer */,
@@ -136,6 +141,8 @@
 				56E975F92BC1BD9B00AA1B50 /* ClientHolder.hpp */,
 				56E975FB2BC1C85F00AA1B50 /* StateHolder.cpp */,
 				56E975FC2BC1C85F00AA1B50 /* StateHolder.hpp */,
+				56E975FE2BC2039800AA1B50 /* Logger.cpp */,
+				56E975FF2BC2039800AA1B50 /* Logger.hpp */,
 			);
 			path = ShowServer;
 			sourceTree = "<group>";
@@ -221,6 +228,14 @@
 			path = "asio-1.28";
 			sourceTree = "<group>";
 		};
+		56E976032BC20DF000AA1B50 /* examples */ = {
+			isa = PBXGroup;
+			children = (
+				56E976022BC20DF000AA1B50 /* server.cfg */,
+			);
+			path = examples;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -294,6 +309,7 @@
 				56E975BA2BC1609F00AA1B50 /* ErrorPacket.cpp in Sources */,
 				56E975C52BC1609F00AA1B50 /* timeutil.cpp in Sources */,
 				56E975F42BC194FA00AA1B50 /* ServerClient.cpp in Sources */,
+				56E976002BC2039800AA1B50 /* Logger.cpp in Sources */,
 				56E975BC2BC1609F00AA1B50 /* LoadPacket.cpp in Sources */,
 				56E975C12BC1609F00AA1B50 /* ShowPacket.cpp in Sources */,
 				56E975BF2BC1609F00AA1B50 /* PacketType.cpp in Sources */,

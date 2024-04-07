@@ -10,7 +10,7 @@
 #include <string>
 
 #include "asio.hpp"
-
+#include "utility/timeutil.hpp"
 #include "network/Connection.hpp"
 
 class ServerClient ;
@@ -36,6 +36,10 @@ public:
     auto is_open() const -> bool ;
     auto close() -> void ;
     auto setHandle(const std::string &name) -> void ;
-    auto setRemoteClose(RemoteCloseRoutine &function)-> void ;
+    auto setRemoteClose(RemoteCloseRoutine function)-> void ;
+    auto read() -> void ;
+    auto ip() const -> std::string ;
+    auto timeStamp() -> util::ourclock::time_point ;
+    auto handle() const -> const std::string& ;
 };
 #endif /* ServerClient_hpp */

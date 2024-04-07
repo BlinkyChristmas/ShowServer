@@ -73,7 +73,9 @@ public:
     auto setCloseCallback(CloseCallback function) -> void;
     auto readExpired(int seconds) -> bool ;
     auto writeExpired(int seconds) -> bool ;
-    
+    auto clearReadTime() -> void ;
+    auto clearWriteTime() -> void ;
+
     auto send(const Packet &packet) -> bool ;
 };
 

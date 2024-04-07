@@ -9,6 +9,7 @@
 class StateHolder{
     std::vector<bool> states ;
     std::string logfile ;
+    static const std::vector<std::string> STATENAMES ;
 public:
     enum State{
         running=0,listening,startrange,inshow,playing

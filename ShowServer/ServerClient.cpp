@@ -68,6 +68,25 @@ auto ServerClient::setHandle(const std::string &name) -> void {
 }
 
 // =======================================================================
-auto ServerClient::setRemoteClose(RemoteCloseRoutine &function)-> void {
+auto ServerClient::setRemoteClose(RemoteCloseRoutine function)-> void {
     this->remoteCloseCallback = function ;
+}
+
+// =======================================================================
+auto ServerClient::read() -> void {
+    this->connection->read();
+}
+
+// =======================================================================
+auto ServerClient::ip() const -> std::string {
+    return  connection->peer() ;
+}
+// =======================================================================
+auto ServerClient::timeStamp() -> util::ourclock::time_point {
+    return connection->time() ;
+}
+
+// =======================================================================
+auto ServerClient::handle() const -> const std::string& {
+    return connection->handle ;
 }
