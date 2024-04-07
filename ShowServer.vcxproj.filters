@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\ShowServer">
+      <UniqueIdentifier>{8bfceece-e7cd-4cce-a380-5c2148ebf20c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common">
+      <UniqueIdentifier>{2f16961c-ecd4-456f-a1a4-6b4479d5c08a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common\network">
+      <UniqueIdentifier>{918a7354-bf2e-4a33-82db-ee54b4c09b08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common\packets">
+      <UniqueIdentifier>{a60a6278-1e4c-481a-904f-bce18e25e032}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common\utility">
+      <UniqueIdentifier>{5d46d979-fccb-4b6b-ab87-48326178eb0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\thirdparty">
+      <UniqueIdentifier>{7c68a015-1f94-4fdf-9061-a7f68784cbd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\thirdparty\asio-1.28">
+      <UniqueIdentifier>{b5b19aa4-a406-4caf-b587-385bf950139e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ShowServer\ClientHolder.cpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\Listener.cpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\Logger.cpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\main.cpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\PlayList.cpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\ServerClient.cpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\ServerConfiguration.cpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\Show.cpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowServer\StateHolder.cpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClCompile>
+    <ClCompile Include="common\network\Connection.cpp">
+      <Filter>Source Files\common\network</Filter>
+    </ClCompile>
+    <ClCompile Include="common\network\FrameValue.cpp">
+      <Filter>Source Files\common\network</Filter>
+    </ClCompile>
+    <ClCompile Include="common\utility\BaseConfiguration.cpp">
+      <Filter>Source Files\common\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="common\utility\buffer.cpp">
+      <Filter>Source Files\common\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="common\utility\mapfile.cpp">
+      <Filter>Source Files\common\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="common\utility\timeutil.cpp">
+      <Filter>Source Files\common\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\ErrorPacket.cpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\IdentPacket.cpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\LoadPacket.cpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\NopPacket.cpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\Packet.cpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\PacketType.cpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\PlayPacket.cpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\ShowPacket.cpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packets\SyncPacket.cpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ShowServer\ClientHolder.hpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowServer\Listener.hpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowServer\Logger.hpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowServer\PlayList.hpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowServer\ServerClient.hpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowServer\ServerConfiguration.hpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowServer\Show.hpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowServer\StateHolder.hpp">
+      <Filter>Source Files\ShowServer</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\Connection.hpp">
+      <Filter>Source Files\common\network</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\FrameValue.hpp">
+      <Filter>Source Files\common\network</Filter>
+    </ClInclude>
+    <ClInclude Include="common\utility\BaseConfiguration.hpp">
+      <Filter>Source Files\common\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="common\utility\buffer.hpp">
+      <Filter>Source Files\common\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="common\utility\dbgutil.hpp">
+      <Filter>Source Files\common\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="common\utility\mapfile.hpp">
+      <Filter>Source Files\common\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="common\utility\strutil.hpp">
+      <Filter>Source Files\common\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="common\utility\timeutil.hpp">
+      <Filter>Source Files\common\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\allpackets.hpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\ErrorPacket.hpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\IdentPacket.hpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\LoadPacket.hpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\NopPacket.hpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\Packet.hpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\PacketType.hpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\PlayPacket.hpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\ShowPacket.hpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packets\SyncPacket.hpp">
+      <Filter>Source Files\common\packets</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
