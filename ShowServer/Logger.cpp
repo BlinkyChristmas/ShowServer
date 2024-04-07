@@ -19,7 +19,7 @@ auto Logger::logConnection(const std::string &handle, const std::string &ip, boo
     static const std::string connection_format = "%s = %s, %s, %s"s;
     auto time = util::sysTimeToString(timepoint);
     if (!connection_file.empty()) {
-        auto msg = util::format(connection_format, handle.c_str(), (state?" Connected  ":"Disconnected"), ip.c_str() , time.c_str()  );
+        auto msg = util::format(connection_format, handle.c_str(),  time.c_str(),  (state?" Connected  ":"Disconnected"), ip.c_str()  );
         DBGMSG(std::cout, msg) ;
         auto output = std::ofstream(connection_file,std::ios::app) ;
         if (!output.is_open()) {
