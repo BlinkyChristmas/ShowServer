@@ -249,7 +249,7 @@ auto processIdentification(ClientPointer client, PacketPointer packet) -> bool {
 
 // ==========================================================================
 auto processError(ClientPointer client, PacketPointer packet) -> bool {
-    
+    DBGMSG(std::cout, "Error reported by: "s+client->handle());
     return true ;
 }
 
