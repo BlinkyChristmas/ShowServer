@@ -6,6 +6,7 @@
 #include <string>
 #include <filesystem>
 #include <thread>
+#include <fstream>
 
 #include "packets/allpackets.hpp"
 #include "utility/dbgutil.hpp"
@@ -23,9 +24,9 @@
 using namespace std::string_literals ;
 
 auto runLoop(ServerConfiguration &config) -> bool ;
+ServerConfiguration configuration ;
 
 int main(int argc, const char * argv[]) {
-    ServerConfiguration configuration ;
     auto exitcode = EXIT_SUCCESS ;
     try {
         if (argc < 2) { throw std::runtime_error("Missing configuration file!");}
@@ -249,7 +250,17 @@ auto processIdentification(ClientPointer client, PacketPointer packet) -> bool {
 
 // ==========================================================================
 auto processError(ClientPointer client, PacketPointer packet) -> bool {
-    DBGMSG(std::cout, "Error reported by: "s+client->handle());
+    static const std::string format = "%s = %s, %s, %s"s ;
+    auto ptr = static_cast<ErrorPacket*>(packet.get()) ;
+    auto type = ptr->category() ;
+    auto file = ptr->name() ;
+    // we should put out the error log
+    auto msg = util::format(format,client->handle().c_str(),util::sysTimeToString(util::ourclock::now()).c_str(),(type == ErrorPacket::CatType::AUDIO?"Audio":"Play"),file.c_str());
+    auto output = std::ofstream(configuration.errorlog,std::ios::app) ;
+    if (output.is_open()){
+        output << msg << std::endl;
+        output.close();
+    }
     return true ;
 }
 
@@ -259,7 +270,8 @@ auto initialConnect(ConnectionPointer connection) -> void {
     // add our close callback
     client->setRemoteClose(std::bind(&processClose,std::placeholders::_1)) ;
     // We need to check the state for show, and if playing!
-    if (states.stateFor(StateHolder::State::activerange)){
+    if (states.stateFor(StateHolder::State::activerange) || ourShow.inShow){
+        //DBGMSG(std::cout, "Sending Show to ON for intial connect");
         auto packet = ShowPacket(true) ;
         client->send(packet) ;
     }
