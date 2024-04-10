@@ -18,7 +18,7 @@ auto StateHolder::log(const std::string &logfile) -> bool {
     if (logfile.empty()){
         return false ;
     }
-    auto msg = "STATE = "s + this->describe() + ", "s +  util::sysTimeToString(util::ourclock::now());
+    auto msg = "STATE = "s + util::sysTimeToString(util::ourclock::now()) +", " +  this->describe() ;
     DBGMSG(std::cout,msg) ;
     auto output = std::ofstream(logfile,std::ios::app) ;
     if (!output.is_open()) {
@@ -46,7 +46,9 @@ auto StateHolder::setLogFile(const std::string &name) -> void {
 auto StateHolder::setState(State position, bool state) -> void {
     if (states[position] != state) {
         states[position] = state ;
-        log(logfile) ;
+        if (position != State::playing){
+            log(logfile) ;
+        }
     }
 }
 
@@ -57,7 +59,8 @@ auto StateHolder::stateFor(State position) const -> bool {
 // ========================================================================
 auto StateHolder::describe() const -> std::string {
     auto msg = ""s ;
-    for (auto i=0; i < 5; i++){
+    //  This is only four, becasue we dont log playing!
+    for (auto i=0; i < 4; i++){
         if (!msg.empty()){
             msg += ", "s ;
         }
