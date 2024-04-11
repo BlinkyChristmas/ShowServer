@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		566435D92BC7F7B00093C309 /* BufferPacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 566435D82BC7F7B00093C309 /* BufferPacket.cpp */; };
 		56E9753E2BC15D9900AA1B50 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E9753D2BC15D9900AA1B50 /* main.cpp */; };
 		56E975B72BC1609F00AA1B50 /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E975922BC1609F00AA1B50 /* Connection.cpp */; };
 		56E975B92BC1609F00AA1B50 /* FrameValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E975962BC1609F00AA1B50 /* FrameValue.cpp */; };
@@ -46,6 +47,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		566435D72BC7F7B00093C309 /* BufferPacket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BufferPacket.hpp; sourceTree = "<group>"; };
+		566435D82BC7F7B00093C309 /* BufferPacket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferPacket.cpp; sourceTree = "<group>"; };
 		56E9753A2BC15D9900AA1B50 /* ShowServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ShowServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		56E9753D2BC15D9900AA1B50 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		56E975922BC1609F00AA1B50 /* Connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Connection.cpp; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 		56E975AC2BC1609F00AA1B50 /* packets */ = {
 			isa = PBXGroup;
 			children = (
+				566435D82BC7F7B00093C309 /* BufferPacket.cpp */,
+				566435D72BC7F7B00093C309 /* BufferPacket.hpp */,
 				56E975992BC1609F00AA1B50 /* allpackets.hpp */,
 				56E9759A2BC1609F00AA1B50 /* ErrorPacket.cpp */,
 				56E9759B2BC1609F00AA1B50 /* ErrorPacket.hpp */,
@@ -313,6 +318,7 @@
 				56E975C42BC1609F00AA1B50 /* mapfile.cpp in Sources */,
 				56E975D02BC169A600AA1B50 /* ServerConfiguration.cpp in Sources */,
 				56E975FD2BC1C85F00AA1B50 /* StateHolder.cpp in Sources */,
+				566435D92BC7F7B00093C309 /* BufferPacket.cpp in Sources */,
 				56E975C02BC1609F00AA1B50 /* PlayPacket.cpp in Sources */,
 				56E975BB2BC1609F00AA1B50 /* IdentPacket.cpp in Sources */,
 				56E975BE2BC1609F00AA1B50 /* Packet.cpp in Sources */,

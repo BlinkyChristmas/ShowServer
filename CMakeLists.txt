@@ -28,6 +28,8 @@ add_executable(ShowServer
     ${PROJECT_SOURCE_DIR}/common/network/FrameValue.hpp
 
     ${PROJECT_SOURCE_DIR}/common/packets/allpackets.hpp
+    ${PROJECT_SOURCE_DIR}/common/packets/BufferPacket.cpp
+    ${PROJECT_SOURCE_DIR}/common/packets/BufferPacket.hpp
     ${PROJECT_SOURCE_DIR}/common/packets/ErrorPacket.cpp
     ${PROJECT_SOURCE_DIR}/common/packets/ErrorPacket.hpp
     ${PROJECT_SOURCE_DIR}/common/packets/IdentPacket.cpp
