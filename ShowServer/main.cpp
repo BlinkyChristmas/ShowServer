@@ -255,7 +255,7 @@ auto processError(ClientPointer client, PacketPointer packet) -> bool {
     auto type = ptr->category() ;
     auto file = ptr->name() ;
     // we should put out the error log
-    auto msg = util::format(format,client->handle().c_str(),util::sysTimeToString(util::ourclock::now()).c_str(),(type == ErrorPacket::CatType::AUDIO?"Audio":"LIGHT"),file.c_str());
+    auto msg = util::format(format,client->handle().c_str(),util::sysTimeToString(util::ourclock::now()).c_str(),(type == ErrorPacket::CatType::AUDIO?"Audio":"Light"),file.c_str());
     auto output = std::ofstream(configuration.errorlog,std::ios::app) ;
     if (output.is_open()){
         output << msg << std::endl;
