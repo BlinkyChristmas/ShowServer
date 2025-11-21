@@ -82,11 +82,13 @@ Show ourShow;
 
 // ====================================================================
 auto runLoop(ServerConfiguration &config) -> bool {
+/*
 #if defined(SHOW_STANDALONE)
     std::cout << "Standalone mode" << std::endl;
 #else
     std::cout << "Normal mode" << std::endl;
 #endif
+ */
     // Our initial setup
     threadClient = std::thread(&runClient) ;
     states.setLogFile(config.serverlog) ;
@@ -118,7 +120,7 @@ auto runLoop(ServerConfiguration &config) -> bool {
         states.setState(StateHolder::State::running, true) ;
         
         if (config.listenTime.inRange()) {
-            std::cout << "WE should be listening" << std::endl;
+            
             // We should be listening!
             if (!listener->is_open()) {
                 // we are not listening, so lets listen
