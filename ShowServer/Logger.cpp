@@ -37,7 +37,8 @@ auto Logger::logConnection(const std::string &handle, const std::string &ip, boo
 auto Logger::logError(const std::string &handle, const std::string &ip, const std::string &type) -> void {
     static const std::string error_format = "%s = %s, %s, %s"s;
     auto time = util::sysTimeToString(util::ourclock::now());
-    if (!error_file.empty()) {
+#if !defined(STANDALONE)
+   if (!error_file.empty()) {
         auto msg = util::format(error_format, handle.c_str(), type.c_str(), ip.c_str() , time.c_str()  );
         DBGMSG(std::cout, "Error: "s + msg) ;
         auto output = std::ofstream(error_file,std::ios::app) ;
@@ -47,5 +48,6 @@ auto Logger::logError(const std::string &handle, const std::string &ip, const st
         output << msg << std::endl;
         output.close() ;
     }
+#endif
 }
 
