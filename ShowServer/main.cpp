@@ -154,11 +154,6 @@ auto runLoop(ServerConfiguration &config) -> bool {
                         
                     }
                     if (!ourShow.isPlaying) {
-#if defined(SHOW_STANDALONE)
-                        if (config.showloop > ourShow.showloop) {
-                            ourShow.shouldEndShow = true;
-                        }
-#else
                         ourShow.shouldEndShow = !config.showTime.inRange();
                         auto entry = ourShow.nextEntry() ;
                         if (entry.valid()) {
@@ -169,7 +164,6 @@ auto runLoop(ServerConfiguration &config) -> bool {
                             ourShow.start(entry) ;
                             clients->sendPlay(true, FrameValue(0));
                         }
-#endif
                         
                     }
                 }
