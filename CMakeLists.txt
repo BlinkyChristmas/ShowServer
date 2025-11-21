@@ -106,5 +106,5 @@ if (STANDALONE)
     target_compile_definitions(ShowServer PRIVATE
         SHOW_STANDALONE=1
     )
-endif (SHOW_STANDALONE)
+endif (STANDALONE)
 
