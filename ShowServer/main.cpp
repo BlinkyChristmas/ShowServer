@@ -82,7 +82,7 @@ Show ourShow;
 
 // ====================================================================
 auto runLoop(ServerConfiguration &config) -> bool {
-#if defined(STANDALONE)
+#if STANDALONE == 1
     std::cout << "Standalone mode" << std::endl;
 #else
     std::cout << "Normal mode" << std::endl;
@@ -152,8 +152,8 @@ auto runLoop(ServerConfiguration &config) -> bool {
                         
                     }
                     if (!ourShow.isPlaying) {
-#if defined(STANDALONE)
-                        if (config.showloop > ourShow.showLoop) {
+#if STANDALONE  == 1
+                        if (config.showloop > ourShow.showloop) {
                             ourShow.shouldEndShow = true;
                         }
 #else
@@ -197,7 +197,7 @@ auto runLoop(ServerConfiguration &config) -> bool {
                             clients->sendShow(false);
                             ourShow.reset() ;
                         }
-#if defined(STANDALONE)
+#if STANDALONE == 1
                         if (listener->is_open()) {
                             // We should not be listening
                             listener->close() ;
@@ -257,7 +257,7 @@ auto runLoop(ServerConfiguration &config) -> bool {
 // ==========================================================================
 auto processClose(ClientPointer client) -> void {
     // we should log here
-#if !defined(STANDALONE)
+#if STANDALONE != 1
     logger.logConnection(client->handle(), client->ip(), false, client->timeStamp());
 #endif
 }
@@ -274,7 +274,7 @@ auto processIdentification(ClientPointer client, PacketPointer packet) -> bool {
 
 // ==========================================================================
 auto processError(ClientPointer client, PacketPointer packet) -> bool {
-#if !defined(STANDALONE)
+#if STANDALONE!= 1
     static const std::string format = "%s = %s, %s, %s"s ;
     auto ptr = static_cast<ErrorPacket*>(packet.get()) ;
     auto type = ptr->category() ;

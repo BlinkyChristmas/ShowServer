@@ -16,7 +16,7 @@ auto Logger::setLogFiles(const std::string &connectionFile, const std::string &e
 
 // =============================================================================================
 auto Logger::logConnection(const std::string &handle, const std::string &ip, bool state, const util::ourclock::time_point &timepoint) -> void {
-#if !defined(STANDALONE)
+#if STANDALONE != 1
     static const std::string connection_format = "%s = %s, %s, %s"s;
     auto time = util::sysTimeToString(timepoint);
     if (!connection_file.empty()) {
