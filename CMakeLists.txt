@@ -63,7 +63,6 @@ add_executable(ShowServer
 
 target_compile_definitions(ShowServer PRIVATE
         ASIO_STANDALONE
-        STANDALONE=0
 )
 if (WIN32)
     target_compile_definitions(ShowServer PRIVATE
