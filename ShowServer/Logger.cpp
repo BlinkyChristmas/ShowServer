@@ -16,7 +16,7 @@ auto Logger::setLogFiles(const std::string &connectionFile, const std::string &e
 
 // =============================================================================================
 auto Logger::logConnection(const std::string &handle, const std::string &ip, bool state, const util::ourclock::time_point &timepoint) -> void {
-#if SHOW_STANDALONE != 1
+#if !defined(SHOW_STANDALONE)
     static const std::string connection_format = "%s = %s, %s, %s"s;
     auto time = util::sysTimeToString(timepoint);
     if (!connection_file.empty()) {
@@ -37,7 +37,7 @@ auto Logger::logConnection(const std::string &handle, const std::string &ip, boo
 auto Logger::logError(const std::string &handle, const std::string &ip, const std::string &type) -> void {
     static const std::string error_format = "%s = %s, %s, %s"s;
     auto time = util::sysTimeToString(util::ourclock::now());
-#if SHOW_STANDALONE != 1
+#if !defined(SHOW_STANDALONE)
    if (!error_file.empty()) {
         auto msg = util::format(error_format, handle.c_str(), type.c_str(), ip.c_str() , time.c_str()  );
         DBGMSG(std::cout, "Error: "s + msg) ;
