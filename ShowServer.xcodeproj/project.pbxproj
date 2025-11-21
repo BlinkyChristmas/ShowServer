@@ -107,7 +107,7 @@
 		56E9760F2BC3224300AA1B50 /* AUTHORS */ = {isa = PBXFileReference; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
 		56E976102BC3224300AA1B50 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		6493EFD02ECFE5B100F3B693 /* showserver.service */ = {isa = PBXFileReference; lastKnownFileType = text; path = showserver.service; sourceTree = "<group>"; };
-		6493EFD12ECFE61B00F3B693 /* showserver */ = {isa = PBXFileReference; lastKnownFileType = text; path = showserver; sourceTree = "<group>"; };
+		6493EFD12ECFE61B00F3B693 /* showserver.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = showserver.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,7 +270,7 @@
 		6493EFCF2ECFE59C00F3B693 /* startup-service */ = {
 			isa = PBXGroup;
 			children = (
-				6493EFD12ECFE61B00F3B693 /* showserver */,
+				6493EFD12ECFE61B00F3B693 /* showserver.sh */,
 				6493EFD02ECFE5B100F3B693 /* showserver.service */,
 			);
 			path = "startup-service";
