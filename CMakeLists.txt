@@ -102,3 +102,9 @@ target_include_directories(ShowServer
         ${PROJECT_SOURCE_DIR}/common/
         ${PROJECT_SOURCE_DIR}/thirdparty/asio-1.28/
 )
+if (STANDALONE)
+    target_compile_definitions(ShowServer PRIVATE
+        SHOW_STANDALONE=1
+    )
+endif (SHOW_STANDALONE)
+
