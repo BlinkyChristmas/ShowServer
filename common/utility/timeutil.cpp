@@ -185,7 +185,7 @@ namespace util {
     
     // ===========================================================================================
     auto HourRange::inRange(const ourclock::time_point &now ) const -> bool {
-#if STANDALONE == 1
+#if SHOW_STANDALONE == 1
         return true;
 #endif
         auto hnow = HourMinute::now() ;
@@ -195,7 +195,7 @@ namespace util {
     }
     // ===========================================================================================
     auto HourRange::inRange(const HourMinute &value) const -> bool {
-#if STANDALONE == 1
+#if SHOW_STANDALONE == 1
         return true;
 #endif
         auto rvalue = startTime <= value ;
@@ -303,7 +303,7 @@ namespace util {
     
     // ===========================================================================================
     auto MonthRange::inRange(const ourclock::time_point &now  ) const -> bool {
-#if STANDALONE == 1
+#if SHOW_STANDALONE == 1
         return true;
 #endif
 

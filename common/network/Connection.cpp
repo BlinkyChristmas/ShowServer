@@ -125,7 +125,7 @@ auto Connection::read() -> void {
 //======================================================================
 auto Connection::log(std::ostream &output, bool state) -> void {
     // the format is: name = timestamp , state(Connected/Disconnected) , ipaddress
-#if STANDALONE != 1
+#if SHOW_STANDALONE != 1
     static auto const format = "%s = %s , %s , %s"s ;
     auto time = this->connectTime ;
     if (!state && netSocket.is_open()) {
