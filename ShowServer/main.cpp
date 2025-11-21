@@ -82,7 +82,11 @@ Show ourShow;
 
 // ====================================================================
 auto runLoop(ServerConfiguration &config) -> bool {
-    
+#if defined(STANDALONE)
+    std::cout << "Standalone mode" << std::endl;
+#else
+    std::cout << "Normal mode" << std::endl;
+#endif
     // Our initial setup
     threadClient = std::thread(&runClient) ;
     states.setLogFile(config.serverlog) ;
