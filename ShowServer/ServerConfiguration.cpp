@@ -9,6 +9,7 @@ ServerConfiguration::ServerConfiguration():BaseConfiguration(){
     delay = 0 ;
     frameupdate = 270 ;
     port = 50000 ;
+    showloop = 10 ;
 }
 
 // ============================================================================
@@ -57,6 +58,9 @@ auto ServerConfiguration::processKeyValue(const std::string &key, const std::str
     }
     else if (ukey == "SERVERLOG") {
         serverlog = value ;
+    }
+    else if (ukey == "SHOWLOOP") {
+        showloop = std::stoi(value,nullptr,0);
     }
 
 }

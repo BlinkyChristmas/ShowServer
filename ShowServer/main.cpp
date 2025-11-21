@@ -147,6 +147,11 @@ auto runLoop(ServerConfiguration &config) -> bool {
                         
                     }
                     if (!ourShow.isPlaying) {
+#if defined(STANDALONE)
+                        if (config.showloop > ourShow.showLoop) {
+                            ourShow.shouldEndShow = true;
+                        }
+#else
                         ourShow.shouldEndShow = !config.showTime.inRange();
                         auto entry = ourShow.nextEntry() ;
                         if (entry.valid()) {
@@ -157,6 +162,7 @@ auto runLoop(ServerConfiguration &config) -> bool {
                             ourShow.start(entry) ;
                             clients->sendPlay(true, FrameValue(0));
                         }
+#endif
                         
                     }
                 }
@@ -186,7 +192,18 @@ auto runLoop(ServerConfiguration &config) -> bool {
                             clients->sendShow(false);
                             ourShow.reset() ;
                         }
-                    }
+#if defined(STANDALONE)
+                        if (listener->is_open()) {
+                            // We should not be listening
+                            listener->close() ;
+                            states.setState(StateHolder::State::listening, false) ;
+                            // We are going to just shut everything down
+                            clients->clear() ;
+                        }
+                       break;
+#endif
+                   }
+
                 }
             }
             clients->checkRefresh(80) ;
@@ -235,7 +252,9 @@ auto runLoop(ServerConfiguration &config) -> bool {
 // ==========================================================================
 auto processClose(ClientPointer client) -> void {
     // we should log here
+#if !defined(STANDALONE)
     logger.logConnection(client->handle(), client->ip(), false, client->timeStamp());
+#endif
 }
 
 // ==========================================================================
@@ -250,6 +269,7 @@ auto processIdentification(ClientPointer client, PacketPointer packet) -> bool {
 
 // ==========================================================================
 auto processError(ClientPointer client, PacketPointer packet) -> bool {
+#if !defined(STANDALONE)
     static const std::string format = "%s = %s, %s, %s"s ;
     auto ptr = static_cast<ErrorPacket*>(packet.get()) ;
     auto type = ptr->category() ;
@@ -261,6 +281,7 @@ auto processError(ClientPointer client, PacketPointer packet) -> bool {
         output << msg << std::endl;
         output.close();
     }
+#endif
     return true ;
 }
 

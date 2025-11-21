@@ -49,7 +49,7 @@ auto Show::tick(const asio::error_code &ec,asio::steady_timer* timer ) -> void{
 
 // ====================================================================================
 Show::Show():frameTimer(io_context), isPlaying(false),shouldEndShow(false), inShow(false),currentPlaylistEntry(0), currentChapter(ShowChapter::prologue),  songStoppedCallback(nullptr),  songSyncCallback(nullptr), stopImmediately(false), frameSync(270),settleFrame((10)){
-    
+    showloop = 0 ;
     io_thread = std::thread(&Show::runIO,this) ;
 }
 // ====================================================================================
@@ -140,6 +140,8 @@ auto Show::nextEntry() -> ListEntry {
         }
         else if (currentPlaylistEntry >= playlist.body.size() ){
             currentPlaylistEntry = 0 ;
+            showloop += 1 ;
+
         }
         if (!playlist.body.empty() && !shouldEndShow){
             entry = playlist.body.at(currentPlaylistEntry) ;

@@ -57,6 +57,7 @@ public:
     bool stopImmediately;
     ListEntry currentEntry ;
     bool inShow ;
+    int showloop ;
     Show() ;
     ~Show() ;
     auto load(const std::filesystem::path &filepath) -> bool ;

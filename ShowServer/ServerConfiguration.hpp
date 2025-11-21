@@ -26,7 +26,7 @@ public:
     std::int32_t frameupdate;
     std::filesystem::path playlist ;
 
-    
+    int showloop ;
     ServerConfiguration() ;
     ServerConfiguration(const std::filesystem::path &path) ;
     
