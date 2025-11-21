@@ -156,6 +156,23 @@ auto runLoop(ServerConfiguration &config) -> bool {
                     if (!ourShow.isPlaying) {
                         ourShow.shouldEndShow = !config.showTime.inRange();
                         auto entry = ourShow.nextEntry() ;
+                        
+#if defined(SHOW_STANDALONE)
+                        if (ourShow.showloop >= config.showloop) {
+                            // we are done with the show
+                        
+                            states.setState(StateHolder::State::inshow, false) ;
+                            clients->sendShow(false);
+                            ourShow.reset() ;
+                            // We should not be listening
+                            listener->close() ;
+                            states.setState(StateHolder::State::listening, false) ;
+                            // We are going to just shut everything down
+                            clients->clear() ;
+                            break;
+                        }
+
+#endif
                         if (entry.valid()) {
                             DBGMSG(std::cout,util::format("Load: %s, %s",entry.musicName.c_str(),entry.lightName.c_str()));
                             clients->sendLoad(entry.musicName, entry.lightName) ;
@@ -193,16 +210,6 @@ auto runLoop(ServerConfiguration &config) -> bool {
                             clients->sendShow(false);
                             ourShow.reset() ;
                         }
-#if defined(SHOW_STANDALONE)
-                        if (listener->is_open()) {
-                            // We should not be listening
-                            listener->close() ;
-                            states.setState(StateHolder::State::listening, false) ;
-                            // We are going to just shut everything down
-                            clients->clear() ;
-                        }
-                       break;
-#endif
                    }
 
                 }
