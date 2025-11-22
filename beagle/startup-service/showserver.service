@@ -10,7 +10,6 @@ WorkingDirectory=/root/startup
 ExecStart=/root/startup/showserver.sh
 
 [Install]
-After=showclient.service
 WantedBy=multi-user.target
 
 
