@@ -107,7 +107,7 @@ if (STANDALONE)
         SHOW_STANDALONE=1
         SHOW_NOLOG=1
     )
-endif (NOLOG)
+endif (STANDALONE)
 if (NOLOG)
     target_compile_definitions(ShowServer PRIVATE
         SHOW_NOLOG=1
