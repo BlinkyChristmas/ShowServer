@@ -296,7 +296,7 @@ auto processIdentification(ClientPointer client, PacketPointer packet) -> bool {
 
 // ==========================================================================
 auto processError(ClientPointer client, PacketPointer packet) -> bool {
-#if !defined(SHOW_NOLOG
+#if !defined(SHOW_NOLOG)
     static const std::string format = "%s = %s, %s, %s"s ;
     auto ptr = static_cast<ErrorPacket*>(packet.get()) ;
     auto type = ptr->category() ;
