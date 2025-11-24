@@ -26,7 +26,7 @@ public:
     ClientHolder() = default ;
     auto add(ClientPointer client) -> void ;
     auto send(const Packet &packet) -> void ;
-    
+    auto clientTotal() -> std::size_t ;
     auto sendSync(const FrameValue &frame) -> void ;
     auto sendPlay(bool state, const FrameValue &frame) -> void ;
     auto sendNop() -> void ;

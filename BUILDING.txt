@@ -1,6 +1,6 @@
 How to build:
 
-Go the the directory of the target you want to build (ShowServer, ShowClient)
+Go the the directory of the target you want to build (ShowServer)
 
 Then enter:;
   cmake . -B ./build -DCMAKE_BUILD_TYPE=Release
@@ -9,6 +9,7 @@ Then enter:;
   
   # if in standalone mode,    cmake . -B ./build -DCMAKE_BUILD_TYPE=Release -DSTANDALONE=1
 
+  #if a normal mode, but no log, then  cmake . -B ./build -DCMAKE_BUILD_TYPE=Release -DNOLOG=1
   
 
   cmake --build ./build --config Release

@@ -31,7 +31,11 @@ auto ClientHolder::send(const Packet &packet) -> void {
     }
     lastWrite = util::ourclock::now() ;
 }
-
+// ================================================================================
+auto ClientHolder::clientTotal() -> std::size_t  {
+    auto lock = std::lock_guard(accessControl) ;
+    return clients.size() ;
+}
 // ================================================================================
 auto ClientHolder::sendSync(const FrameValue &frame) -> void {
     auto lock = std::lock_guard(accessControl) ;

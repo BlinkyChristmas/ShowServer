@@ -15,7 +15,7 @@ const std::vector<std::string> StateHolder::STATENAMES{
 
 // ========================================================================
 auto StateHolder::log(const std::string &logfile) -> bool {
-#if defined(SHOW_STANDALONE)
+#if defined(SHOW_NOLOG)
     return true ;
 #endif
 

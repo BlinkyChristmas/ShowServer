@@ -105,6 +105,12 @@ target_include_directories(ShowServer
 if (STANDALONE)
     target_compile_definitions(ShowServer PRIVATE
         SHOW_STANDALONE=1
+        SHOW_NOLOG=1
     )
-endif (STANDALONE)
+endif (NOLOG)
+if (NOLOG)
+    target_compile_definitions(ShowServer PRIVATE
+        SHOW_NOLOG=1
+    )
+endif (NOLOG)
 

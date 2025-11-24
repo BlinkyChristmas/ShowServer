@@ -145,44 +145,62 @@ auto runLoop(ServerConfiguration &config) -> bool {
                     
                 }
                 
+                // ************************************************************************
                 if (config.showTime.inRange()){
-                    if (!states.stateFor(StateHolder::State::inshow)) {
-                        states.setState(StateHolder::State::inshow, true) ;
-                        clients->sendShow(true) ;
-                        ourShow.reset() ;
-                        ourShow.load(config.playlist);
-                        
-                    }
-                    if (!ourShow.isPlaying) {
-                        ourShow.shouldEndShow = !config.showTime.inRange();
-                        auto entry = ourShow.nextEntry() ;
-                        
+                    
 #if defined(SHOW_STANDALONE)
-                        if (ourShow.showloop >= config.showloop) {
-                            // we are done with the show
+                    // Do we have a connection, otherwise we should just keep looping
+                    
+                    if (clients->clientTotal() > 0) {
                         
-                            states.setState(StateHolder::State::inshow, false) ;
-                            clients->sendShow(false);
-                            ourShow.reset() ;
-                            // We should not be listening
-                            listener->close() ;
-                            states.setState(StateHolder::State::listening, false) ;
-                            // We are going to just shut everything down
-                            clients->clear() ;
-                            break;
-                        }
-
+                        
 #endif
-                        if (entry.valid()) {
-                            DBGMSG(std::cout,util::format("Load: %s, %s",entry.musicName.c_str(),entry.lightName.c_str()));
-                            clients->sendLoad(entry.musicName, entry.lightName) ;
-                            std::this_thread::sleep_for(std::chrono::seconds(2)) ;
-                            states.setState(StateHolder::State::playing, true) ;
-                            ourShow.start(entry) ;
-                            clients->sendPlay(true, FrameValue(0));
+                        if (!states.stateFor(StateHolder::State::inshow)) {
+                            states.setState(StateHolder::State::inshow, true) ;
+                            clients->sendShow(true) ;
+                            ourShow.reset() ;
+                            ourShow.load(config.playlist);
+                            
                         }
-                        
+                        if (!ourShow.isPlaying) {
+                            ourShow.shouldEndShow = !config.showTime.inRange();
+                            auto entry = ourShow.nextEntry() ;
+                            
+#if defined(SHOW_STANDALONE)
+                            
+                            if (ourShow.showloop >= config.showloop) {
+                                // we are done with the show
+                                
+                                states.setState(StateHolder::State::inshow, false) ;
+                                clients->sendShow(false);
+                                ourShow.reset() ;
+                                // We should not be listening
+                                listener->close() ;
+                                states.setState(StateHolder::State::listening, false) ;
+                                // We are going to just shut everything down
+                                clients->clear() ;
+                                break;
+                            }
+                            
+#endif
+                            if (entry.valid()) {
+                                DBGMSG(std::cout,util::format("Load: %s, %s",entry.musicName.c_str(),entry.lightName.c_str()));
+                                clients->sendLoad(entry.musicName, entry.lightName) ;
+                                std::this_thread::sleep_for(std::chrono::seconds(2)) ;
+                                states.setState(StateHolder::State::playing, true) ;
+                                ourShow.start(entry) ;
+                                clients->sendPlay(true, FrameValue(0));
+                            }
+                            
+                        }
+#if defined(SHOW_STANDALONE)
                     }
+                    else {
+                        // we should pause for a few seconds
+                        std::this_thread::sleep_for(std::chrono::seconds(1)) ;
+                    }
+#endif
+
                 }
                 else {
                     
@@ -213,6 +231,7 @@ auto runLoop(ServerConfiguration &config) -> bool {
                    }
 
                 }
+                // **********************************************************************
             }
             clients->checkRefresh(80) ;
         }
@@ -260,7 +279,7 @@ auto runLoop(ServerConfiguration &config) -> bool {
 // ==========================================================================
 auto processClose(ClientPointer client) -> void {
     // we should log here
-#if !defined(SHOW_STANDALONE)
+#if !defined(SHOW_NOLOG)
     logger.logConnection(client->handle(), client->ip(), false, client->timeStamp());
 #endif
 }
@@ -277,7 +296,7 @@ auto processIdentification(ClientPointer client, PacketPointer packet) -> bool {
 
 // ==========================================================================
 auto processError(ClientPointer client, PacketPointer packet) -> bool {
-#if !defined(SHOW_STANDALONE)
+#if !defined(SHOW_NOLOG
     static const std::string format = "%s = %s, %s, %s"s ;
     auto ptr = static_cast<ErrorPacket*>(packet.get()) ;
     auto type = ptr->category() ;
